@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>இனிய பிறந்தநாள் சீதா 💖</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300;1,500&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --pk1:#ff2d6b;
+  --pk2:#ff6fa3;
+  --pk3:#ffb3ce;
+  --pk4:#ffe4ef;
+  --pk5:#fff0f6;
+  --gold:#e8b86d;
+  --deep:#2a0018;
+}
+
+html,body{
+  width:100%;height:100%;
+  overflow:hidden;
+  font-family:'Cormorant Garamond',serif;
+}
+
+/* ════ ANIMATED PINK BG ════ */
+body{
+  background:linear-gradient(135deg,#ff85a1 0%,#ff4b7a 25%,#e91e63 50%,#ff6fa3 75%,#ff85a1 100%);
+  background-size:400% 400%;
+  animation:bgShift 8s ease-in-out infinite;
+}
+@keyframes bgShift{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* ════ FLOATING HEARTS (many, big, pink) ════ */
+#hc{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.fh{
+  position:absolute;
+  animation:fhUp linear infinite;
+  font-size:28px;
+  opacity:0;
+}
+@keyframes fhUp{
+  0%{transform:translateY(100vh) scale(0) rotate(0deg);opacity:0}
+  10%{opacity:.9}
+  80%{opacity:.6}
+  100%{transform:translateY(-15vh) scale(1.3) rotate(20deg);opacity:0}
+}
+
+/* ════ CONFETTI CANVAS ════ */
+#cc{position:fixed;inset:0;z-index:2;pointer-events:none;opacity:0;transition:opacity .8s}
+#cc.on{opacity:1}
+
+/* ════ CURSOR ════ */
+#cur{
+  position:fixed;width:16px;height:16px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.8);
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  box-shadow:0 0 14px rgba(255,255,255,0.7);
+  transition:transform .12s;
+}
+
+/* ════════════════════════════
+   INTRO — ENVELOPE
+════════════════════════════ */
+#intro{
+  position:fixed;inset:0;z-index:500;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  transition:opacity 1.3s;
+}
+
+#moodyTxt{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-size:clamp(18px,5vw,26px);
+  color:rgba(255,255,255,0);
+  letter-spacing:2px;
+  text-align:center;
+  line-height:2.2;
+  transition:color 1.8s ease;
+  padding:0 28px;
+  text-shadow:0 2px 20px rgba(0,0,0,.2);
+}
+#moodyTxt.show{color:rgba(255,255,255,0.95)}
+
+#envWrap{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;
+  transition:opacity 1s;
+}
+#envWrap.show{opacity:1;pointer-events:all}
+
+/* envelope SVG card */
+.env-card{
+  width:clamp(220px,58vw,300px);
+  cursor:pointer;
+  filter:drop-shadow(0 16px 50px rgba(180,0,80,0.45));
+  transition:transform .4s,filter .4s;
+  animation:envFloat 3s ease-in-out infinite;
+}
+.env-card:hover{
+  transform:scale(1.05) translateY(-6px);
+  filter:drop-shadow(0 22px 60px rgba(255,60,120,0.65));
+}
+@keyframes envFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-10px)}
+}
+
+.env-hint{
+  margin-top:24px;
+  font-family:'Dancing Script',cursive;
+  font-size:clamp(20px,6vw,30px);
+  color:rgba(255,255,255,0.85);
+  animation:breathe 2.2s ease-in-out infinite;
+  text-shadow:0 2px 12px rgba(0,0,0,.2);
+}
+@keyframes breathe{0%,100%{opacity:.5}50%{opacity:1}}
+
+/* ════════════════════════════
+   FLOATING BOX CARD
+════════════════════════════ */
+#stage{
+  position:fixed;inset:0;z-index:10;
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+  opacity:0;pointer-events:none;
+  transition:opacity 1.2s;
+}
+#stage.show{opacity:1;pointer-events:all}
+
+.card-box{
+  position:relative;
+  width:min(88vw, 370px);
+  height:min(72vh, 480px);
+  background:rgba(255,255,255,0.18);
+  backdrop-filter:blur(28px) saturate(1.6);
+  -webkit-backdrop-filter:blur(28px) saturate(1.6);
+  border:1.5px solid rgba(255,255,255,0.45);
+  border-radius:28px;
+  padding:0;
+  box-shadow:
+    0 8px 40px rgba(180,0,80,0.22),
+    0 2px 0 rgba(255,255,255,0.5) inset,
+    0 -1px 0 rgba(255,200,220,0.25) inset;
+  animation:cardFloat 4s ease-in-out infinite;
+  text-align:center;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  overflow:hidden;
+}
+@keyframes cardFloat{
+  0%,100%{transform:translateY(0px) rotate(-.4deg)}
+  33%{transform:translateY(-10px) rotate(.4deg)}
+  66%{transform:translateY(-5px) rotate(-.2deg)}
+}
+
+/* shimmer overlay */
+.card-box::before{
+  content:'';
+  position:absolute;inset:0;border-radius:28px;
+  background:linear-gradient(135deg,rgba(255,255,255,.18) 0%,transparent 60%,rgba(255,200,220,.1) 100%);
+  pointer-events:none;
+}
+
+.page{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:22px 24px 20px;
+  opacity:0;pointer-events:none;
+  transition:opacity .75s ease,transform .75s ease;
+  transform:translateX(60px);
+}
+.page.active{opacity:1;pointer-events:all;transform:translateX(0)}
+.page.out-left{opacity:0;transform:translateX(-60px)}
+
+/* ── verse text ── */
+.lbl{
+  font-size:10px;
+  letter-spacing:4px;text-transform:uppercase;
+  color:rgba(255,255,255,.7);
+  margin-bottom:10px;
+  font-family:'Cormorant Garamond',serif;
+  font-weight:300;
+}
+.verse{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(15px,3.8vw,19px);
+  font-style:italic;
+  line-height:1.75;
+  color:#fff;
+  text-shadow:0 2px 16px rgba(150,0,60,.3);
+}
+.verse .hi{color:#ffe0ec;font-weight:700}
+.verse .gl{color:var(--gold)}
+.rule{
+  width:40px;height:1.5px;
+  background:rgba(255,255,255,.45);
+  margin:12px auto;
+  border-radius:2px;
+}
+.sub{
+  font-size:11px;
+  letter-spacing:2px;
+  color:rgba(255,255,255,.55);
+  margin-top:6px;
+  font-family:'Cormorant Garamond',serif;
+  font-weight:300;
+}
+
+/* ── page 5 rain ── */
+#rainC{position:fixed;inset:0;z-index:3;pointer-events:none;opacity:0;transition:opacity 1s}
+#rainC.on{opacity:1}
+.rd{
+  position:absolute;top:-30px;
+  width:1.5px;
+  background:linear-gradient(to bottom,transparent,rgba(255,180,210,.7));
+  border-radius:1px;
+  animation:rf linear infinite;
+}
+@keyframes rf{to{transform:translateY(110vh)}}
+.umbrella{
+  font-size:clamp(42px,10vw,58px);
+  animation:uf 3.2s ease-in-out infinite;
+  margin-bottom:6px;
+}
+@keyframes uf{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-10px) rotate(5deg)}}
+
+/* ── page 6 photo ── */
+.photo-ring{
+  width:clamp(72px,17vw,90px);
+  height:clamp(72px,17vw,90px);
+  border-radius:50%;
+  border:2.5px solid rgba(255,255,255,.7);
+  box-shadow:0 0 0 5px rgba(255,255,255,.12),0 0 30px rgba(255,100,160,.4);
+  overflow:hidden;
+  margin:0 auto 12px;
+  animation:rp 3s ease-in-out infinite;
+}
+@keyframes rp{
+  0%,100%{box-shadow:0 0 0 5px rgba(255,255,255,.12),0 0 30px rgba(255,100,160,.4)}
+  50%{box-shadow:0 0 0 8px rgba(255,255,255,.06),0 0 50px rgba(255,100,160,.6)}
+}
+.photo-ring img{width:100%;height:100%;object-fit:cover}
+.btitle{
+  font-family:'Dancing Script',cursive;
+  font-size:clamp(18px,4.5vw,24px);
+  color:#fff;margin-bottom:2px;
+  text-shadow:0 0 16px rgba(255,100,160,.5);
+}
+.bname{
+  font-family:'Dancing Script',cursive;
+  font-size:clamp(22px,5.5vw,30px);
+  color:#ffe0ec;font-weight:700;
+  text-shadow:0 0 24px rgba(255,180,210,.6);
+  margin-bottom:10px;
+}
+.bverse{
+  font-family:'Playfair Display',serif;
+  font-style:italic;
+  font-size:clamp(13px,3.2vw,15px);
+  line-height:1.8;
+  color:rgba(255,255,255,.9);
+}
+.songbtn{
+  display:inline-flex;align-items:center;gap:7px;
+  margin-top:14px;padding:8px 18px;
+  border:1.5px solid rgba(255,255,255,.5);
+  border-radius:50px;
+  color:#fff;
+  font-family:'Cormorant Garamond',serif;
+  font-size:12px;letter-spacing:1.5px;
+  text-decoration:none;
+  background:rgba(255,255,255,.15);
+  transition:background .3s,transform .2s;
+}
+.songbtn:hover{background:rgba(255,255,255,.28);transform:scale(1.04)}
+
+/* ════ HEART-ARROW NAV ════ */
+#nav{
+  position:fixed;
+  bottom:clamp(16px,4vh,32px);
+  left:0;right:0;
+  display:flex;align-items:center;justify-content:center;
+  gap:clamp(18px,5vw,36px);
+  z-index:200;
+  opacity:0;transition:opacity 1s;
+}
+#nav.show{opacity:1}
+
+.hbtn{
+  background:rgba(255,255,255,.18);
+  backdrop-filter:blur(10px);
+  border:1.5px solid rgba(255,255,255,.4);
+  border-radius:50%;
+  width:clamp(48px,12vw,60px);
+  height:clamp(48px,12vw,60px);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  box-shadow:0 4px 20px rgba(180,0,80,.2);
+  transition:transform .25s,background .25s,box-shadow .25s;
+  font-size:clamp(20px,5vw,26px);
+  user-select:none;
+}
+.hbtn:hover{
+  background:rgba(255,255,255,.32);
+  transform:scale(1.15);
+  box-shadow:0 6px 30px rgba(255,50,120,.35);
+}
+.hbtn:active{transform:scale(.92)}
+.hbtn.off{opacity:.2;pointer-events:none}
+
+.dots{display:flex;gap:7px;align-items:center}
+.dot{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(255,255,255,.35);
+  transition:all .4s;cursor:pointer;
+  border:1.5px solid rgba(255,255,255,.5);
+}
+.dot.on{
+  background:#fff;
+  width:22px;border-radius:4px;
+  box-shadow:0 0 10px rgba(255,255,255,.7);
+}
+
+/* pg counter */
+#pgn{
+  position:fixed;top:16px;right:18px;
+  font-size:12px;letter-spacing:3px;
+  color:rgba(255,255,255,.55);
+  z-index:200;
+  opacity:0;transition:opacity 1s;
+  font-family:'Cormorant Garamond',serif;
+  text-shadow:0 1px 8px rgba(0,0,0,.2);
+}
+#pgn.show{opacity:1}
+
+/* sparkle */
+.sp{
+  position:fixed;pointer-events:none;z-index:800;
+  font-size:20px;
+  animation:spk .75s ease forwards;
+}
+@keyframes spk{
+  0%{transform:translate(0,0) scale(0);opacity:1}
+  100%{transform:translate(var(--tx),var(--ty)) scale(1.5);opacity:0}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="hc"></div>
+<canvas id="cc"></canvas>
+<div id="rainC"></div>
+
+<!-- ══ INTRO ══ -->
+<div id="intro">
+  <div id="moodyTxt">உனக்காக<br>ஒரு இரவு<br>காத்திருந்தது...</div>
+
+  <div id="envWrap">
+    <!-- SVG envelope -->
+    <svg class="env-card" id="envBtn" onclick="openEnv()" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="eg" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#ff6fa3"/>
+          <stop offset="100%" stop-color="#c2185b"/>
+        </linearGradient>
+        <filter id="eshadow">
+          <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#c2185b" flood-opacity="0.4"/>
+        </filter>
+      </defs>
+      <!-- body -->
+      <rect x="10" y="60" width="280" height="130" rx="12" fill="url(#eg)" filter="url(#eshadow)"/>
+      <!-- left flap -->
+      <polygon points="10,60 150,148 10,190" fill="#e91e63" opacity=".7"/>
+      <!-- right flap -->
+      <polygon points="290,60 150,148 290,190" fill="#e91e63" opacity=".7"/>
+      <!-- bottom flap -->
+      <polygon points="10,190 150,148 290,190" fill="#d81b60" opacity=".85"/>
+      <!-- top flap -->
+      <polygon points="10,60 150,148 290,60" fill="#f06292" opacity=".9"/>
+      <!-- wax seal -->
+      <circle cx="150" cy="130" r="28" fill="#c2185b" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+      <circle cx="150" cy="130" r="22" fill="#ad1457" stroke="rgba(255,200,220,0.3)" stroke-width="1"/>
+      <text x="150" y="137" text-anchor="middle" font-size="22" font-family="serif">💌</text>
+      <!-- decorative hearts -->
+      <text x="40" y="95" font-size="16" opacity=".6">♥</text>
+      <text x="248" y="95" font-size="16" opacity=".6">♥</text>
+      <text x="24" y="170" font-size="12" opacity=".4">♥</text>
+      <text x="264" y="170" font-size="12" opacity=".4">♥</text>
+    </svg>
+    <p class="env-hint">தொட்டு திற... 💖</p>
+  </div>
+</div>
+
+<!-- ══ STAGE with floating card ══ -->
+<div id="stage">
+  <div class="card-box" id="cardBox">
+
+    <!-- P1 -->
+    <div class="page active" id="p1">
+      <p class="lbl">✦ ஒரு கேள்வி ✦</p>
+      <div class="verse">
+        யாரோ கேட்டார்கள்...<br>
+        <span class="hi">மகிழ்ச்சி என்றால்<br>என்னவென்று?</span> 💭
+      </div>
+      <div class="rule"></div>
+      <p class="sub">திரும்பு... விடையிருக்கிறது →</p>
+    </div>
+
+    <!-- P2 -->
+    <div class="page" id="p2">
+      <p class="lbl">✦ விடை ✦</p>
+      <div class="verse">
+        மறுவார்த்தை கூறாமல்<br>
+        <span class="hi">புன்னகைத்தேன்...</span><br>
+        என் நெஞ்சிற்குள்<br>
+        <span class="hi">உன்னை நினைத்துக்கொண்டே!</span> ❤️
+      </div>
+    </div>
+
+    <!-- P3 -->
+    <div class="page" id="p3">
+      <p class="lbl">✦ ஒரு அதிசயம் ✦</p>
+      <div class="verse">
+        கோடி உயிர்கள் வாழும்<br>
+        இவ்வுலகில்...<br>
+        என் இதயம் <span class="hi">உன்னை ஏன்</span><br>
+        தேர்ந்தெடுத்தது? ✨
+      </div>
+      <div class="rule"></div>
+    </div>
+
+    <!-- P4 -->
+    <div class="page" id="p4">
+      <p class="lbl">✦ பிரபஞ்சம் சொன்னது ✦</p>
+      <div class="verse">
+        பிரபஞ்சம் செய்த<br>
+        <span class="hi">பேரதிசயம் அது...</span><br><br>
+        என் ஆயுள் செய்த<br>
+        <span class="gl">ஆகச்சிறந்த தவம் நீ!</span> 🤍
+      </div>
+    </div>
+
+    <!-- P5 -->
+    <div class="page" id="p5">
+      <div class="umbrella">☂️</div>
+      <p class="lbl">✦ காதல் மழை ✦</p>
+      <div class="verse">
+        விதியின் தூரங்கள்<br>
+        நம்மைப் பிரித்தாலும்...<br><br>
+        <span class="hi">உன் நினைவெனும்<br>ஒற்றைக் குடைக்குள்,</span><br>
+        நனையாமல் வாழ்கிறது<br>
+        <span class="gl">நம் காதல்!</span> 🌧️
+      </div>
+    </div>
+
+    <!-- P6 -->
+    <div class="page" id="p6">
+      <div class="photo-ring">
+        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=300&h=300&fit=crop&crop=face" alt="Sita" id="heroPhoto">
+      </div>
+      <div class="btitle">இனிய பிறந்தநாள்</div>
+      <div class="bname">என் சீதா! 💖</div>
+      <div class="rule"></div>
+      <div class="bverse">
+        என் அநாதைக் காற்றுக்கு...<br>
+        <em style="color:#ffe0ec">முகவரி தந்த சுவாசமே!</em><br>
+        இந்த ஆயுள் முழுவதும்<br>
+        உன் மடியில்... 🌍🤍
+      </div>
+      <a class="songbtn" href="https://www.youtube.com/results?search_query=Kannanule+Oh+Sita+Hey+Sita+Sita+Ramam" target="_blank" rel="noopener">
+        🎵 &nbsp;Kannanule — Sita Ramam
+      </a>
+    </div>
+
+  </div><!-- /card-box -->
+</div>
+
+<!-- ══ NAV ══ -->
+<div id="nav">
+  <button class="hbtn off" id="prevBtn" onclick="go(-1)" aria-label="Prev">←💗</button>
+  <div class="dots" id="dotsRow"></div>
+  <button class="hbtn" id="nextBtn" onclick="go(1)" aria-label="Next">💗→</button>
+</div>
+<div id="pgn"></div>
+
+<script>
+/* cursor */
+const cur=document.getElementById('cur');
+document.addEventListener('mousemove',e=>{cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px'});
+
+/* state */
+const TOTAL=6;let page=1,live=false;
+
+/* floating hearts */
+const hc=document.getElementById('hc');
+const HEM=['🩷','💗','💖','💓','💕','🌸','💞','❤️','🌷'];
+function spawnHeart(){
+  const h=document.createElement('div');
+  h.className='fh';
+  h.textContent=HEM[~~(Math.random()*HEM.length)];
+  h.style.left=Math.random()*100+'vw';
+  h.style.fontSize=(16+Math.random()*28)+'px';
+  const dur=4+Math.random()*5;
+  h.style.animationDuration=dur+'s';
+  h.style.animationDelay=(Math.random()*3)+'s';
+  hc.appendChild(h);
+  setTimeout(()=>h.remove(),(dur+3)*1000);
+}
+for(let i=0;i<18;i++)setTimeout(()=>spawnHeart(),i*250);
+setInterval(spawnHeart,500);
+
+/* dots */
+const dotsRow=document.getElementById('dotsRow');
+for(let i=1;i<=TOTAL;i++){
+  const d=document.createElement('div');
+  d.className='dot'+(i===1?' on':'');
+  d.dataset.i=i;
+  d.onclick=()=>{if(live)goTo(i)};
+  dotsRow.appendChild(d);
+}
+function syncDots(){document.querySelectorAll('.dot').forEach(d=>d.classList.toggle('on',+d.dataset.i===page))}
+const pgn=document.getElementById('pgn');
+function syncPgn(){pgn.textContent='0'+page+' / 0'+TOTAL}
+function syncBtns(){
+  document.getElementById('prevBtn').classList.toggle('off',page===1);
+  document.getElementById('nextBtn').classList.toggle('off',page===TOTAL);
+}
+
+/* navigate */
+function goTo(n){
+  const old=document.getElementById('p'+page);
+  old.classList.remove('active');
+  old.classList.add('out-left');
+  setTimeout(()=>old.classList.remove('out-left'),800);
+  page=n;
+  const neo=document.getElementById('p'+page);
+  neo.classList.add('active');
+  syncDots();syncPgn();syncBtns();
+  pageFX(page);
+}
+function go(d){const n=page+d;if(n>=1&&n<=TOTAL)goTo(n)}
+
+/* page FX */
+const rainC=document.getElementById('rainC');
+const cc=document.getElementById('cc'),ctx=cc.getContext('2d');
+let confRAF=null;
+
+function pageFX(n){
+  rainC.classList.toggle('on',n===5);
+  if(n===6){cc.classList.add('on');runConf()}
+  else{cc.classList.remove('on');stopConf()}
+}
+
+/* rain */
+(function(){
+  for(let i=0;i<100;i++){
+    const d=document.createElement('div');d.className='rd';
+    d.style.left=Math.random()*100+'vw';
+    d.style.height=(30+Math.random()*70)+'px';
+    d.style.animationDuration=(.4+Math.random()*.7)+'s';
+    d.style.animationDelay=(-Math.random()*2)+'s';
+    d.style.opacity=.3+Math.random()*.5;
+    rainC.appendChild(d);
+  }
+})();
+
+/* confetti */
+let pieces=[];
+function resCC(){cc.width=innerWidth;cc.height=innerHeight}
+resCC();addEventListener('resize',resCC);
+const COLS=['#ff6fa3','#ff2d6b','#e8b86d','#fff','#ffb3ce','#ffd700','#ff94c2','#f48fb1'];
+function runConf(){
+  pieces=[];
+  for(let i=0;i<160;i++)pieces.push({
+    x:Math.random()*innerWidth,y:Math.random()*-innerHeight,
+    w:5+Math.random()*9,h:3+Math.random()*5,
+    c:COLS[~~(Math.random()*COLS.length)],
+    s:1.5+Math.random()*2.5,a:Math.random()*Math.PI*2,
+    sp:(Math.random()-.5)*.12,vx:(Math.random()-.5)*1.8
+  });
+  (function loop(){
+    ctx.clearRect(0,0,cc.width,cc.height);
+    pieces.forEach(p=>{
+      p.y+=p.s;p.x+=p.vx;p.a+=p.sp;
+      if(p.y>cc.height+10){p.y=-10;p.x=Math.random()*cc.width}
+      ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.a);
+      ctx.fillStyle=p.c;ctx.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      ctx.restore();
+    });
+    confRAF=requestAnimationFrame(loop);
+  })();
+}
+function stopConf(){if(confRAF){cancelAnimationFrame(confRAF);confRAF=null}ctx.clearRect(0,0,cc.width,cc.height)}
+
+/* sparkle */
+document.addEventListener('click',e=>{
+  if(!live)return;
+  ['💖','✨','🌸','💗','💫','🩷'].forEach((_,i)=>{
+    const s=document.createElement('div');s.className='sp';
+    s.textContent=['💖','✨','🌸','💗','💫','🩷'][i];
+    s.style.left=e.clientX+'px';s.style.top=e.clientY+'px';
+    const a=Math.random()*Math.PI*2,d=40+Math.random()*70;
+    s.style.setProperty('--tx',Math.cos(a)*d+'px');
+    s.style.setProperty('--ty',Math.sin(a)*d+'px');
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),800);
+  });
+});
+
+/* swipe */
+let tx0=0;
+addEventListener('touchstart',e=>{tx0=e.touches[0].clientX},{passive:true});
+addEventListener('touchend',e=>{
+  if(!live)return;
+  const dx=tx0-e.changedTouches[0].clientX;
+  if(Math.abs(dx)>55)go(dx>0?1:-1);
+});
+
+/* keyboard */
+addEventListener('keydown',e=>{
+  if(!live)return;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')go(1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(-1);
+});
+
+/* ── INTRO SEQUENCE ── */
+const moodyTxt=document.getElementById('moodyTxt');
+const envWrap=document.getElementById('envWrap');
+const intro=document.getElementById('intro');
+
+setTimeout(()=>moodyTxt.classList.add('show'),500);
+setTimeout(()=>{moodyTxt.style.transition='opacity 1s';moodyTxt.style.opacity='0'},3400);
+setTimeout(()=>{moodyTxt.style.display='none';envWrap.classList.add('show')},4400);
+
+function openEnv(){
+  const btn=document.getElementById('envBtn');
+  btn.style.transition='transform .5s,opacity .5s';
+  btn.style.transform='scale(1.12)';
+  setTimeout(()=>{btn.style.transform='scale(0) rotate(15deg)';btn.style.opacity='0'},250);
+  setTimeout(()=>{
+    intro.style.transition='opacity 1.2s';
+    intro.style.opacity='0';
+  },700);
+  setTimeout(()=>{
+    intro.style.display='none';
+    live=true;
+    document.getElementById('stage').classList.add('show');
+    document.getElementById('nav').classList.add('show');
+    document.getElementById('pgn').classList.add('show');
+    syncPgn();syncBtns();
+  },1900);
+}
+</script>
+</body>
+</html>
